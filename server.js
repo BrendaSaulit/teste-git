@@ -41,3 +41,5 @@ app.get("/posts/:id", (req, res) => {
     res.status(200).json(posts[index]);
 });
 
+
+//Criando uma função
