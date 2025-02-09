@@ -1,25 +1,7 @@
 import express from "express";
 import conectarAoBanco from "./src/config/dbConfig.js";
 
-await conectarAoBanco(process.env.STRING_CONEXAO);
-
-const posts = [
-    {   
-        id: 1,
-        descricao: "Uma foto teste",
-        imagem: "https://placecats.com/millie/300/150"
-    },
-    {
-        id: 2,
-        descricao: "gato fazendo yoga",
-        imagem: "https://placecats.com/millie/300/150"
-    },
-    {
-        id: 3,
-        descricao: "Gato fazendo panqueca",
-        imagem: "https://placecats.com/millie/300/150"
-    }
-];
+const conexao = await conectarAoBanco(process.env.STRING_CONEXAO);
 
 
 const app = express();
@@ -29,20 +11,14 @@ app.listen(3000, () => {
     console.log("Servidor escutando...");
 });
 
-app.get("/posts", (req, res) => {
-    res.status(200).json(posts);
+
+async function getTodosOsPosts(params) {
+    const db = conexao.db("imersao-instabytes") //criando objeto para representar o banco
+    const colecao = db.collection("posts") //criando objeto para representar a colecao "posts" dentro do banco
+    return colecao.find().toArray()
+}
+
+app.get("/posts", async(req, res) => {  //método get, temos uma rota /posts e é necessario por o async no começo da funçao da funcao para poder usar o await depois (sao um parzinho)
+    const posts = await getTodosOsPosts() //criando a variavel posts
+    res.status(200).json(posts); //passando a variavel posts que recebe os dados para json
 });
-
-function buscarPostPorId(id) {
-    return posts.findIndex((post) =>{
-        return post.id === Number(id)
-    })
-};
-
-app.get("/posts/:id", (req, res) => {
-    const index = buscarPostPorId(req.params.id)
-    res.status(200).json(posts[index]);
-});
-
-
-//Criando uma função
