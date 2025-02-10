@@ -1,3 +1,5 @@
+import conectarAoBanco from "../config/dbConfig.js";
+
 //conecta ao banco de dados utilizando a string de conexão fornecida como variável de ambiente
 const conexao = await conectarAoBanco(process.env.STRING_CONEXAO);
 
@@ -7,3 +9,4 @@ export default async function getTodosOsPosts(params) { //export default pois é
     const colecao = db.collection("posts") //criando objeto para representar a colecao "posts" dentro do banco
     return colecao.find().toArray()
 }
+

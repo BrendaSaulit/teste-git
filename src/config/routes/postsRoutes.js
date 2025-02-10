@@ -5,7 +5,7 @@ const routes = (app) => {
 
     app.use(express.json());//permite que o servidor interprete requisiçoes com corpo no formato JSON (um middleware específico para análise de JSON)
 
-    app.get("/posts", listarPosts ); //método get, temos uma rota /posts. AQUI listarPosts vem da pasta Controllers (para separar as responsabilidades, cada pasta tem uma função)
+    app.get("/posts", listarPosts); //método get, temos uma rota /posts. AQUI listarPosts vem da pasta Controllers (para separar as responsabilidades, cada pasta tem uma função)
 }
 
 export default routes; //Permite que o conteúdo exportado seja reutilizado em outros arquivos ou módulos.
