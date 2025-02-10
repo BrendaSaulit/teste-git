@@ -1,4 +1,4 @@
-import conectarAoBanco from "../config/dbConfig.js";
+import conectarAoBanco from "../dbConfig.js";//cada ponto signica voltar uma pasta acima desta
 
 //conecta ao banco de dados utilizando a string de conexão fornecida como variável de ambiente
 const conexao = await conectarAoBanco(process.env.STRING_CONEXAO);
