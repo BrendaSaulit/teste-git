@@ -1,5 +1,5 @@
 import express from "express";
-import routes from "./src/config/routes/postsRoutes.js";//importando a funçao routes do arquivo postsRoutes.js
+import routes from "./src/routes/postsRoutes.js";//importando a funçao routes do arquivo postsRoutes.js
 
 
 const app = express();
